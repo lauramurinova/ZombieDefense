@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Destroy
   - NotDestroy
+  - Window
+  - Zombie
   - Wall
-  - 
-  - 
   - 
   - 
   - 

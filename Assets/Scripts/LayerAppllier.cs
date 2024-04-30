@@ -1,10 +1,9 @@
+using System.Linq;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
 public class LayerApplier : MonoBehaviour
 {
-    [SerializeField] private Material _stencil;
-    
     public void GetRoomObjectAndApplyLayer()
     {
         MRUKRoom mrukComponent = FindObjectOfType<MRUKRoom>();
@@ -20,14 +19,18 @@ public class LayerApplier : MonoBehaviour
 
         foreach (Transform child in obj.transform)
         {
+            if(child.gameObject.name.ToLower().Contains("window")) continue;
             ApplyLayer(child.gameObject, layerName);
         }
+    }
 
+    public void EnableWindows()
+    {
         foreach (var renderer in FindObjectsOfType<MeshRenderer>())
         {
             if (renderer.name.ToLower().Contains("window_frame_effect"))
             {
-                renderer.material = _stencil;
+                renderer.enabled = true;
             }
         }
     }
