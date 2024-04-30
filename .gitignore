@@ -61,3 +61,5 @@ crashlytics-build.properties
 # Ignore the Security folder within Resources
 Assets/Resources/Security/
 Assets/Resources/Security.meta
+Assets/Scripts/MRUKDestruction/*
+Assets/Scripts/MRUKDestruction.meta
