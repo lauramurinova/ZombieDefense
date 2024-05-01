@@ -1,5 +1,5 @@
-using System.Linq;
 using Meta.XR.MRUtilityKit;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LayerApplier : MonoBehaviour
@@ -21,7 +21,23 @@ public class LayerApplier : MonoBehaviour
         {
             if(child.gameObject.name.ToLower().Contains("window")) continue;
             ApplyLayer(child.gameObject, layerName);
+            
+            if (child.name.ToLower().Contains("floor"))
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Floor");
+                if (child.name.ToLower().Contains("effect"))
+                {
+                    CreateBiggerFloorCollider(child);
+                }
+            }
         }
+        
+    }
+
+    private static void CreateBiggerFloorCollider(Transform child)
+    {
+        var collider = child.AddComponent<BoxCollider>();
+        collider.size *= 2f;
     }
 
     public void EnableWindows()

@@ -1,39 +1,9 @@
 fileFormatVersion: 2
-guid: 4c8f0aaf17f675b47b0f480446fe7099
+guid: 2eb0466987b5afd48995a692b2b8ba69
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ZombieGirl_Material
-    second: {fileID: 2100000, guid: d76ba2aee15693445afece1761b3bfd3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ZombieGirl_body_Material
-    second: {fileID: 2100000, guid: b7e315d4a51a4924d99ed08bcb521ccf, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: zombie_body_diffuse
-    second: {fileID: 2800000, guid: 232768197a3e4c94d95b9689b7d03bff, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: zombie_diffuse
-    second: {fileID: 2800000, guid: 6756796d838e0234c909b4a7edd0bf46, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: zombie_normal
-    second: {fileID: 2800000, guid: c5d007f9af5f864459867ccdea36339d, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: zombie_specular
-    second: {fileID: 2800000, guid: 3b372cd2a9c6c2e45b2521ca06b65f06, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
