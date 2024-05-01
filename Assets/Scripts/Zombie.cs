@@ -114,6 +114,7 @@ public class Zombie : MonoBehaviour
         _state = ZombieState.Die;
         _animator.SetTrigger("Die");
         GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<CharacterController>().enabled = false;
         _zombieController.SpawnZombie();
         Invoke(nameof(DisableAnimator), 2f);
         enabled = false;

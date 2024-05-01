@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnOnStart: 0
-  MeshMaterial: {fileID: 2100000, guid: effdf85b0d0b2f94c993c5df0a4d6256, type: 2}
+  MeshMaterial: {fileID: 2100000, guid: d133b813bcc02864ebb48445e3ade218, type: 2}
   BorderSize: 0
   Colliders: 1
   CutHoles: 0
@@ -650,6 +650,11 @@ PrefabInstance:
       propertyPath: _stencil
       value: 
       objectReference: {fileID: 2100000, guid: 670cd0f09565d9c418e34c0cce5223ab, type: 2}
+    - target: {fileID: 5613049337242860625, guid: afc2fc543fbc4834fb3c6cd02cd5c2ff,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5754587452912521825, guid: afc2fc543fbc4834fb3c6cd02cd5c2ff,
         type: 3}
       propertyPath: _zombieController
@@ -851,6 +856,11 @@ PrefabInstance:
       propertyPath: _stencil
       value: 
       objectReference: {fileID: 2100000, guid: 670cd0f09565d9c418e34c0cce5223ab, type: 2}
+    - target: {fileID: 5613049337242860625, guid: afc2fc543fbc4834fb3c6cd02cd5c2ff,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5754587452912521825, guid: afc2fc543fbc4834fb3c6cd02cd5c2ff,
         type: 3}
       propertyPath: _zombieController
@@ -1071,6 +1081,11 @@ PrefabInstance:
       propertyPath: _zombieController
       value: 
       objectReference: {fileID: 1318237995}
+    - target: {fileID: 3133498981277374888, guid: a9eacce6182289e459de9af385631ad1,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3157779093360792346, guid: a9eacce6182289e459de9af385631ad1,
         type: 3}
       propertyPath: _stencil
@@ -1762,6 +1777,12 @@ Transform:
   - {fileID: 4442036325813860452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1326453914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4451955654461531064, guid: 4ce2eacff2d49d94cadb8d9a395a55ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 4442036325813860451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1369165356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1775,6 +1796,11 @@ PrefabInstance:
       propertyPath: _zombieController
       value: 
       objectReference: {fileID: 1318237995}
+    - target: {fileID: 3133498981277374888, guid: a9eacce6182289e459de9af385631ad1,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3157779093360792346, guid: a9eacce6182289e459de9af385631ad1,
         type: 3}
       propertyPath: _stencil
@@ -1953,6 +1979,11 @@ PrefabInstance:
       propertyPath: _stencil
       value: 
       objectReference: {fileID: 2100000, guid: 670cd0f09565d9c418e34c0cce5223ab, type: 2}
+    - target: {fileID: 5613049337242860625, guid: afc2fc543fbc4834fb3c6cd02cd5c2ff,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5754587452912521825, guid: afc2fc543fbc4834fb3c6cd02cd5c2ff,
         type: 3}
       propertyPath: _zombieController
@@ -2398,6 +2429,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2042167731}
+  - {fileID: 1925388540}
   - {fileID: 190880760}
   - {fileID: 2116252005}
   m_Father: {fileID: 0}
@@ -2442,6 +2474,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2116252006}
+        m_TargetAssemblyTypeName: Meta.XR.MRUtilityKit.EffectMesh, meta.xr.mrutilitykit
+        m_MethodName: CreateMesh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1925388542}
         m_TargetAssemblyTypeName: Meta.XR.MRUtilityKit.EffectMesh, meta.xr.mrutilitykit
         m_MethodName: CreateMesh
         m_Mode: 1
@@ -2732,6 +2776,11 @@ PrefabInstance:
       propertyPath: _zombieController
       value: 
       objectReference: {fileID: 1318237995}
+    - target: {fileID: 3133498981277374888, guid: a9eacce6182289e459de9af385631ad1,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3157779093360792346, guid: a9eacce6182289e459de9af385631ad1,
         type: 3}
       propertyPath: _stencil
@@ -2838,6 +2887,62 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_SortAtRoot: 0
+--- !u!1 &1925388539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1925388540}
+  - component: {fileID: 1925388542}
+  m_Layer: 0
+  m_Name: EffectMesh_Rest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1925388540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925388539}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1813653563}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1925388542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925388539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76943ac7e7394f3e969f0c048b26639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnOnStart: 0
+  MeshMaterial: {fileID: 2100000, guid: d133b813bcc02864ebb48445e3ade218, type: 2}
+  BorderSize: 1
+  Colliders: 1
+  CutHoles: 0
+  castShadows: 1
+  hideMesh: 0
+  textureCoordinateModes:
+  - WallU: 0
+    WallV: 0
+    AnchorUV: 0
+  Labels: 8080
 --- !u!114 &1944625127 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9214956227399846583, guid: 35327a8f120186541a5de9fefed8dd56,
@@ -2862,7 +2967,7 @@ GameObject:
   - component: {fileID: 2042167730}
   - component: {fileID: 2042167732}
   m_Layer: 0
-  m_Name: EffectMesh_All
+  m_Name: EffectMesh_Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2891,7 +2996,7 @@ MonoBehaviour:
   - WallU: 0
     WallV: 0
     AnchorUV: 0
-  Labels: 65463
+  Labels: 57351
 --- !u!4 &2042167731
 Transform:
   m_ObjectHideFlags: 0
@@ -3496,7 +3601,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _body
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1326453914}
     - target: {fileID: 193134749028266300, guid: 4ce2eacff2d49d94cadb8d9a395a55ba,
         type: 3}
       propertyPath: _zombieController
