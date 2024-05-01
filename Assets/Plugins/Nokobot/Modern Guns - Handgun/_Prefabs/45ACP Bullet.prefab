@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4396417133449288}
   - component: {fileID: 1067929284349639088}
   - component: {fileID: -5635494230619463800}
+  - component: {fileID: -8291066635416499003}
   m_Layer: 0
   m_Name: 45ACP Bullet
   m_TagString: Untagged
@@ -74,6 +75,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735df59c531580a4fa2bbefefd1ecbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stencil: {fileID: 2100000, guid: 670cd0f09565d9c418e34c0cce5223ab, type: 2}
+--- !u!114 &-8291066635416499003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122964723992546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62484d244ce7c014897d08770be98259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
+  debrisPrefabs: []
+  hitSound: {fileID: 8300000, guid: 06eee7f0e4ef34039cf88fac871fef14, type: 3}
+  destroyRadius: 0.2
+  _stencil: {fileID: 2100000, guid: 670cd0f09565d9c418e34c0cce5223ab, type: 2}
+  _destroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3724705277012589230
 PrefabInstance:
   m_ObjectHideFlags: 0

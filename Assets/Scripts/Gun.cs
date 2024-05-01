@@ -2,6 +2,7 @@ using System.Collections;
 using Oculus.Interaction.HandGrab;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Gun : MonoBehaviour, IHandGrabUseDelegate
 {
@@ -19,9 +20,10 @@ public class Gun : MonoBehaviour, IHandGrabUseDelegate
         [Tooltip("Bullet Speed")] [SerializeField] private float shotPower = 500f;
         [Tooltip("Casing Ejection Speed")] [SerializeField] private float ejectPower = 150f;
         
+        [FormerlySerializedAs("bulletPrefab")]
         [Header("Prefab Refrences")]
-        public GameObject bulletPrefab;
-        public GameObject muzzleFlashPrefab;
+        [SerializeField] private GameObject _bulletPrefab;
+        [FormerlySerializedAs("muzzleFlashPrefab")] [SerializeField] private GameObject _muzzleFlashPrefab;
 
         private bool _wasFired = false;
         private float _dampedUseStrength = 0;
@@ -48,18 +50,18 @@ public class Gun : MonoBehaviour, IHandGrabUseDelegate
 
         private void Fire()
         {
-            if (muzzleFlashPrefab)
+            if (_muzzleFlashPrefab)
             {
                 GameObject tempFlash;
-                tempFlash = Instantiate(muzzleFlashPrefab, _barrel.position, _barrel.rotation);
+                tempFlash = Instantiate(_muzzleFlashPrefab, _barrel.position, _barrel.rotation);
 
                 Destroy(tempFlash, destroyTimer);
             }
 
-            if (!bulletPrefab)
+            if (!_bulletPrefab)
             { return; }
 
-            Instantiate(bulletPrefab, _barrel.position, _barrel.rotation).GetComponent<Rigidbody>().AddForce(_barrel.forward * shotPower, ForceMode.Acceleration);
+            Instantiate(_bulletPrefab, _barrel.position, _barrel.rotation).GetComponent<Rigidbody>().AddForce(_barrel.forward * shotPower, ForceMode.Acceleration);
         }
 
         public void BeginUse()
