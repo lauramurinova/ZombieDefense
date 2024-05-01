@@ -18,6 +18,8 @@ public class ZombieController : MonoBehaviour
     private List<Transform> _windows = new List<Transform>();
     private bool _loaded = false;
     private int _zombiesSpawned = 0;
+    private Coroutine _bossZombieCoroutine;
+    private Coroutine _zombieCoroutine;
 
     public void LoadWindows()
     {
@@ -78,7 +80,7 @@ public class ZombieController : MonoBehaviour
         {
             if (_loaded)
             {
-                StartCoroutine(SpawnBossZombie());
+                if(_bossZombieCoroutine == null) _bossZombieCoroutine = StartCoroutine(SpawnBossZombie());
                 return;
             }
             else
@@ -88,7 +90,12 @@ public class ZombieController : MonoBehaviour
         }
 
         _zombiesSpawned++;
-        StartCoroutine(LoadZombie());
+
+        if (_zombieCoroutine == null)
+        {
+            _zombiesSpawned++;
+            _zombieCoroutine = StartCoroutine(LoadZombie());
+        }
     }
 
     private IEnumerator LoadZombie()
@@ -109,6 +116,7 @@ public class ZombieController : MonoBehaviour
         // remove the window and the zombie from the list
         _zombies.Remove(_zombies[randomZombieIndex]);
         _windows.Remove(_windows[randomWindowIndex]);
+        _zombieCoroutine = null;
     }
 
     private static void SetObjectPosition(GameObject zombie)

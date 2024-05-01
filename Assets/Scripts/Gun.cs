@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 public class Gun : MonoBehaviour, IHandGrabUseDelegate
 {
         [Header("Input")] [SerializeField] private Transform _trigger;
+        [SerializeField] private Animator _animator;
         [SerializeField] private Transform _barrel;
         [SerializeField] private AnimationCurve _triggerRotationCurve;
         [SerializeField] private SnapAxis _axis = SnapAxis.X;
@@ -61,6 +62,7 @@ public class Gun : MonoBehaviour, IHandGrabUseDelegate
             if (!_bulletPrefab)
             { return; }
 
+            _animator.SetTrigger("Fire");
             Instantiate(_bulletPrefab, _barrel.position, _barrel.rotation).GetComponent<Rigidbody>().AddForce(_barrel.forward * shotPower, ForceMode.Acceleration);
         }
 

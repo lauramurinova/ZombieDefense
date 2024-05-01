@@ -27,12 +27,13 @@ public class Zombie : MonoBehaviour
     
     void Start()
     {
+        GetComponent<AudioSource>().Play();
         _player = GameObject.Find("OVRCameraRig");
         
         GoToWindow();
         foreach (var controller in _controllerDestroyCells)
         {
-            controller._destroyed.AddListener(GoToPlayer);
+            controller.onDestroyed.AddListener(GoToPlayer);
         }
     }
 
@@ -48,7 +49,7 @@ public class Zombie : MonoBehaviour
     {
         foreach (var controller in _controllerDestroyCells)
         {
-            controller._destroyed.RemoveAllListeners();
+            controller.onDestroyed.RemoveAllListeners();
         }
 
         if (name.Contains("Boss"))
@@ -114,17 +115,19 @@ public class Zombie : MonoBehaviour
         _state = ZombieState.Die;
         _animator.SetTrigger("Die");
         GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<CharacterController>().enabled = false;
         _zombieController.SpawnZombie();
         Invoke(nameof(DisableAnimator), 2f);
         enabled = false;
         foreach (var controller in _controllerDestroyCells)
         {
-            controller._destroyed.RemoveAllListeners();
+            controller.onDestroyed.RemoveAllListeners();
         }
     }
     
     private void DisableAnimator()
     {
+        GetComponent<AudioSource>().Stop();
         _animator.enabled = false;
     }
 
@@ -145,7 +148,7 @@ public class Zombie : MonoBehaviour
 
         if (_state.Equals(ZombieState.Attack))
         {
-            // called when player is attacking
+            //
         }
     }
 
