@@ -1,5 +1,4 @@
 using System.Collections;
-using BlackWhale.DestructibleMeshSystem.Demo;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +7,7 @@ public enum ZombieState
     Idle = 0,
     Walk  = 1,
     Attack = 2,
+    Stunned = 3,
     Die = 3
 }
 
@@ -15,25 +15,31 @@ public class Zombie : MonoBehaviour
 {
     [HideInInspector] public Transform assignedWindow;
     
-    [SerializeField] private ControllerDestroyCells[] _controllerDestroyCells;
+    [SerializeField] private DestroyablePlaneInteractor[] _destroyablePlaneInteractors;
     [SerializeField] public Animator _animator;
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private ZombieController _zombieController;
     [SerializeField] private GameObject _body;
+    [SerializeField] private OVRPassthroughLayer _attackLayer;
+    [SerializeField] private OVRPassthroughLayer _aliveLayer;
 
     public ZombieState _state = ZombieState.Attack;
     private Vector3 _targetPosition;
     private GameObject _player;
+    private GameObject _target;
     
     void Start()
     {
         GetComponent<AudioSource>().Play();
-        _player = GameObject.Find("OVRCameraRig");
+        _player = GameObject.Find("CenterEyeAnchor");
         
-        GoToWindow();
-        foreach (var controller in _controllerDestroyCells)
+        if (name.Contains("Boss"))
         {
-            controller.onDestroyed.AddListener(GoToPlayer);
+            WalkToPlayer();
+        }
+        else
+        {
+            GoToPlayer();
         }
     }
 
@@ -43,11 +49,58 @@ public class Zombie : MonoBehaviour
         {
             Die();
         }
+
+        if (other.gameObject.name.ToLower().Contains("cup") || other.transform.root.name.Contains("Camera"))
+        {
+            Stunned(other);
+        }
+    }
+
+    private void Stunned(Collision other)
+    {
+        if(_state.Equals(ZombieState.Stunned)) return;
+
+        if (other.gameObject.name.ToLower().Contains("cup"))
+        {
+            other.gameObject.GetComponent<Cup>().Break(other.contacts[0].point);
+        }
+
+        _aliveLayer.gameObject.SetActive(true);
+        _attackLayer.gameObject.SetActive(false);
+        var previousState = _state;
+        _state = ZombieState.Stunned;
+        _animator.SetTrigger("Stun");
+        _agent.isStopped = true;
+        StartCoroutine(Stun(previousState));
+    }
+
+    private IEnumerator Stun(ZombieState previousState)
+    {
+        yield return new WaitForSeconds(1.3f);
+        // GoToIdle();
+        switch (previousState)
+        {
+            case ZombieState.Attack:
+            {
+                GoToAttack();
+                break;
+            }
+            case ZombieState.Walk:
+            {
+                WalkToPlayer();
+                break;
+            }
+            case ZombieState.Idle:
+            {
+                GoToIdle();
+                break;
+            }
+        }
     }
 
     private void GoToPlayer()
     {
-        foreach (var controller in _controllerDestroyCells)
+        foreach (var controller in _destroyablePlaneInteractors)
         {
             controller.onDestroyed.RemoveAllListeners();
         }
@@ -64,11 +117,15 @@ public class Zombie : MonoBehaviour
 
     private void WalkToPlayer()
     {
+        _aliveLayer.gameObject.SetActive(true);
+        _attackLayer.gameObject.SetActive(false);
         transform.LookAt(_player.transform.position);
-        transform.position = assignedWindow.position;
         _agent.isStopped = false;
+        _agent.SetDestination(_player.transform.position);
         _state = ZombieState.Walk;
+        _targetPosition = transform.position;
         _targetPosition = _player.transform.position;
+        _target = _player;
         _animator.SetTrigger("Walk");
     }
 
@@ -76,8 +133,10 @@ public class Zombie : MonoBehaviour
     {
         transform.LookAt(assignedWindow);
         _agent.isStopped = false;
+        _agent.SetDestination(assignedWindow.position);
         _state = ZombieState.Walk;
         _targetPosition = assignedWindow.position;
+        _target = assignedWindow.gameObject;
         _animator.SetTrigger("Walk");
     }
 
@@ -100,6 +159,8 @@ public class Zombie : MonoBehaviour
     
     public void GoToAttack()
     {
+        _aliveLayer.gameObject.SetActive(false);
+        _attackLayer.gameObject.SetActive(true);
         _agent.isStopped = true;
         transform.LookAt(_player.transform);
         _state = ZombieState.Attack;
@@ -110,6 +171,8 @@ public class Zombie : MonoBehaviour
     {
         if (_state.Equals(ZombieState.Die)) return;
         
+        _aliveLayer.gameObject.SetActive(true);
+        _attackLayer.gameObject.SetActive(false);
         StopAllCoroutines();
         _agent.isStopped = true;
         _state = ZombieState.Die;
@@ -119,7 +182,7 @@ public class Zombie : MonoBehaviour
         _zombieController.SpawnZombie();
         Invoke(nameof(DisableAnimator), 2f);
         enabled = false;
-        foreach (var controller in _controllerDestroyCells)
+        foreach (var controller in _destroyablePlaneInteractors)
         {
             controller.onDestroyed.RemoveAllListeners();
         }
@@ -144,27 +207,45 @@ public class Zombie : MonoBehaviour
         if (_state.Equals(ZombieState.Idle))
         {
             HandleIdleUpdate();
+
+            if (Vector3.Distance(transform.position, _player.transform.position) > 2f)
+            {
+                WalkToPlayer();
+
+            }
         }
 
         if (_state.Equals(ZombieState.Attack))
         {
-            //
+            if (Vector3.Distance(transform.position, _player.transform.position) > 2f)
+            {
+                WalkToPlayer();
+            
+            }
         }
     }
 
     private void HandleWalkUpdate()
     {
-        _agent.destination = _targetPosition;
+        // _agent.destination = new Vector3(_targetPosition.x, 0f, _targetPosition.z);
 
-        if (Vector3.Distance(transform.position, _targetPosition) < 1.5f)
+        if (Vector3.Distance(transform.position, _targetPosition) < 1.8f)
         {
-            GoToIdle();
+            if (_target == assignedWindow.gameObject)
+            {
+                _target = null;
+                StartCoroutine(ClimbWindow());
+            }
+            else
+            {
+                GoToIdle();
+            }
         }
     }
 
     private void HandleIdleUpdate()
     {
-        var colliders = Physics.OverlapSphere(transform.position, 2f);
+        var colliders = Physics.OverlapSphere(transform.position, 1.8f);
 
         foreach (var collider in colliders)
         {

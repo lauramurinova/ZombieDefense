@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using BlackWhale.DestructibleMeshSystem;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class ZombieController : MonoBehaviour
 {
@@ -12,8 +12,9 @@ public class ZombieController : MonoBehaviour
     [SerializeField] private GameObject ceiling;
     [SerializeField] private Material _window;
     [SerializeField] private Material _stencil;
-    [SerializeField] private MRUKDestructibleMesh _destructibleMesh;
+    [SerializeField] private DestroyablePlane _destroyablePlane;
     [SerializeField] private int _zombiesToSpawn = 4;
+    [SerializeField] private GameObject _menu;
 
     private List<Transform> _windows = new List<Transform>();
     private bool _loaded = false;
@@ -44,6 +45,7 @@ public class ZombieController : MonoBehaviour
 
     private IEnumerator SpawnBossZombie()
     {
+        yield return new WaitForSeconds(2f);
         var ceilingeff = CreateDestructiveCeiling();
 
         var zombie = _bossZombie.GetComponent<Zombie>();
@@ -70,7 +72,7 @@ public class ZombieController : MonoBehaviour
     {
         var ceilingeff = GameObject.Find("CEILING_EffectMesh");
         ceilingeff.GetComponent<MeshRenderer>().material = _window;
-        _destructibleMesh.DestroyWall(GameObject.Find("CEILING_EffectMesh"), ceiling);
+        _destroyablePlane.Initialize();
         return ceilingeff;
     }
 
@@ -93,6 +95,7 @@ public class ZombieController : MonoBehaviour
 
         if (_zombieCoroutine == null)
         {
+            _menu.SetActive(false);
             _zombiesSpawned++;
             _zombieCoroutine = StartCoroutine(LoadZombie());
         }
@@ -127,6 +130,6 @@ public class ZombieController : MonoBehaviour
         zombie.transform.localPosition = position;
         zombie.transform.eulerAngles = Vector3.zero;
         zombie.transform.localEulerAngles = Vector3.zero;
-        zombie.transform.position += -zombie.transform.forward * 7f;
+        zombie.transform.position += -zombie.transform.forward * 2f;
     }
 }
