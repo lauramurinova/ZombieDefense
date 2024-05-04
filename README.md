@@ -10,10 +10,10 @@ The player also has a gun to defeat the zombies.
 Models: Gun: https://assetstore.unity.com/packages/3d/props/guns/modern-guns-handgun-129821\n
         Zombies are from https://www.mixamo.com/.
 
-Audio Assets: Punch: https://pixabay.com/sound-effects/fist-punch-or-kick-7171/\n
-              Shot: https://pixabay.com/sound-effects/realistic-shot-81087/\n
-              Wall Break: https://pixabay.com/sound-effects/wood-smash-3-170418/\n
-              Window Break: https://pixabay.com/sound-effects/window-smashing-sound-197623/\n
+Audio Assets: Punch: https://pixabay.com/sound-effects/fist-punch-or-kick-7171/ \
+              Shot: https://pixabay.com/sound-effects/realistic-shot-81087/  \
+              Wall Break: https://pixabay.com/sound-effects/wood-smash-3-170418/ \
+              Window Break: https://pixabay.com/sound-effects/window-smashing-sound-197623/ \
 
 
 Material: Custom Stencil Material from: https://www.youtube.com/@blackwhalestudio/videos	
