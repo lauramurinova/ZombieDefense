@@ -20,7 +20,7 @@ Realistic MR zombie defense game. Created its prototype within 7 days, worked wi
 
 **Check out my demo video:**
 
-(https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=GondYaYuRu8)
+(https://www.youtube.com/watch?v=GondYaYuRu8)
 
 
 </div>
