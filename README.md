@@ -1,12 +1,32 @@
-Zombie Defense XR
+# MR Zombie Defense Game
 
-Prototype of Zombie Shooter game in XR, with the goal of making it as real as possible.
-Used Meta SDK - Scene Understanding, Interactions, Passthrough Layers, Nav Mesh that is calculated in runtime.
+<div style="text-align: start; justify-content: center;">
 
-The zombies are coming through the users windows and walls. Player can stun the zombie with a push or breaking a cup.
-The player also has a gun to defeat the zombies.
+**Summary:**  
+Realistic MR zombie defense game. Created its prototype within 7 days, worked with various animations, interpolated VR and MR world with wall destruction mechanism, and constructed the game logic and mechanics.
+
+**Skills Utilized:**
+- Unity
+- Meta SDK (Anchors, Passthrough, Interaction)
+- Maximo 3D Animations
+- Unity Animations
+
+**Results:**
+- The app still needs a bit of work (polish more), but it presents an interesting and unique concept.
+
+**Potential Improvements:**
+- The app could be improved by introducing a health system to player and zombies, multiple weapons,
+      extend it to different rooms and make the game logic more difficult, various levels.
+
+**Check out my demo video:**
+
+(https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=GondYaYuRu8)
 
 
+</div>
+
+
+3D Models:
 Models: Gun: https://assetstore.unity.com/packages/3d/props/guns/modern-guns-handgun-129821 \
         Zombies are from https://www.mixamo.com/.
 
